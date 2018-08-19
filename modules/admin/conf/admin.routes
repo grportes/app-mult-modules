@@ -1,0 +1,2 @@
+GET      /v1/usuario/:idUsuario     controllers.admin.UsuarioController.buscar(idUsuario:Long)
+POST     /v1/usuario                controllers.admin.UsuarioController.criar

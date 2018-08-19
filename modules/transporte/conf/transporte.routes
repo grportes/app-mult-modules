@@ -1,0 +1,1 @@
+GET     /v1/veiculo-abastecimento       controllers.transporte.VeiculoController.buscarVlrAbastecimento
