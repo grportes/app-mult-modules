@@ -4,13 +4,19 @@
              version="2.1">
 
     <persistence-unit name="defaultPersistenceUnit" transaction-type="RESOURCE_LOCAL">
+
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
         <non-jta-data-source>DefaultDS</non-jta-data-source>
+
+        <mapping-file>seguranca/usuario.xml</mapping-file>
+
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.SQLiteDialect"/>
             <property name="hibernate.show_sql" value="true" />
             <property name="format_sql" value="true" />
         </properties>
+
     </persistence-unit>
 
 </persistence>

@@ -9,7 +9,9 @@ import play.mvc.Results;
 import seguranca.UsuarioRepository;
 
 import javax.inject.Inject;
+import java.util.List;
 
+import static infra.UtilCollections.isVazia;
 import static play.libs.Json.toJson;
 
 public class UsuarioController extends Controller {
@@ -36,6 +38,19 @@ public class UsuarioController extends Controller {
         }
     }
 
+    @Transactional(readOnly = true)
+    public Result buscarTodos() {
+
+        try {
+            final List<Usuario> usuarios = usuarioRepository.findAll();
+            if (isVazia(usuarios))
+                return noContent();
+            return ok(toJson(usuarios));
+        } catch (Throwable e) {
+            return badRequest(e.getMessage());
+        }
+    }
+
     @Transactional
     public Result criar() {
 
@@ -44,6 +59,20 @@ public class UsuarioController extends Controller {
             usuario.setNome("ze comeia");
             usuarioRepository.save(usuario);
             return ok( toJson(usuario) );
+        } catch (Throwable e) {
+            return badRequest(e.getMessage());
+        }
+    }
+
+    @Transactional(readOnly = true)
+    public Result buscarNome( final Long idUsuario ) {
+
+        try {
+            return usuarioRepository
+                    .buscaNome( idUsuario )
+                    .map(Json::toJson)
+                    .map(Results::ok)
+                    .orElse(noContent());
         } catch (Throwable e) {
             return badRequest(e.getMessage());
         }

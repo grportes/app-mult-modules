@@ -1,2 +1,4 @@
-GET      /v1/usuario/:idUsuario     controllers.admin.UsuarioController.buscar(idUsuario:Long)
-POST     /v1/usuario                controllers.admin.UsuarioController.criar
+GET         /v1/usuario/:idUsuario      controllers.admin.UsuarioController.buscar(idUsuario:Long)
+GET         /v1/usuario-todos           controllers.admin.UsuarioController.buscarTodos
+GET         /v1/usuario-nome/:idUsuario controllers.admin.UsuarioController.buscarNome(idUsuario:Long)
+POST        /v1/usuario                 controllers.admin.UsuarioController.criar
