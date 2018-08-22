@@ -1,30 +1,39 @@
 package controllers.admin;
 
-import play.libs.Json;
+import admin.EmpresaRepository;
+import domains.admin.Empresa;
+import play.db.jpa.Transactional;
 import play.mvc.Controller;
 import play.mvc.Result;
-import play.mvc.Results;
-import services.admin.EmpresaService;
 
 import javax.inject.Inject;
+import java.util.List;
+
+import static infra.UtilCollections.isVazia;
+import static play.libs.Json.toJson;
 
 
 public class EmpresaController extends Controller {
 
-    private final EmpresaService empresaService;
+    private final EmpresaRepository empresaRepository;
 
     @Inject
-    public EmpresaController( final EmpresaService empresaService ) {
+    public EmpresaController(final EmpresaRepository empresaRepository) {
 
-        this.empresaService = empresaService;
+        this.empresaRepository = empresaRepository;
     }
 
+    @Transactional(readOnly = true)
+    public Result buscarEmpresas() {
 
-    public Result buscarEmpresa() {
+        try {
+            final List<Empresa> empresas = empresaRepository.findAll();
+            if (isVazia(empresas))
+                return noContent();
+            return ok(toJson(empresas));
+        } catch (Throwable e) {
+            return badRequest(e.getMessage());
+        }
 
-        return empresaService.dadosEmpresa()
-                .map( Json::toJson )
-                .map( Results::ok )
-                .orElse( noContent() );
     }
 }
