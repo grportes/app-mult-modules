@@ -23,6 +23,16 @@ fnCriarBaseSqlLite()
     version INTEGER NOT NULL
   );
   insert into empresas( razao_social, version ) values ( "EMPRESA MODELO", 0 );
+  -- Veiculo
+  create table veiculos (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    nro_frota INTEGER NOT NULL,
+    descricao VARCHAR(250) NOT NULL,
+    version INTEGER NOT NULL
+  );
+  insert into veiculos( nro_frota, descricao, version ) values ( 1, "VEICULO UM", 0 );
+  insert into veiculos( nro_frota, descricao, version ) values ( 2, "VEICULO DOIS", 0 );
+  insert into veiculos( nro_frota, descricao, version ) values ( 3, "VEICULO TRES", 0 );
 EOF
   echo "base criada!!"
 }

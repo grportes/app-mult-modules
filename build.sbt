@@ -30,13 +30,13 @@ lazy val defaultSettings = Seq(
   libraryDependencies ++= Seq(
     guice,
     javaJpa,
-    "br.com.infra" % "infra-core_2.12" % "1.0-SNAPSHOT"
+    "br.com.infra" % "infra-core_2.12" % "1.1-SNAPSHOT"
   )
 )
 
 lazy val persistenceSettings = Seq(
   libraryDependencies ++= Seq(
-    "br.com.infra" % "infra-jpa_2.12" % "1.0-SNAPSHOT"
+    "br.com.infra" % "infra-jpa_2.12" % "1.1-SNAPSHOT"
   )
 )
 

@@ -1,11 +1,32 @@
 package domains.transporte;
 
+import infra.Model;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.Objects;
 
-public class Veiculo {
+@Entity
+public class Veiculo extends Model {
 
+    @Id
     private Long id;
+
+    @Column
     private Long nroFrota;
+
+    @Column
+    private String descricao;
+
+    @Column
+    private Long version;
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //
+    // GETTERS & SETTERS
+    //
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public Long getId() {
         return id;
@@ -23,6 +44,28 @@ public class Veiculo {
         this.nroFrota = nroFrota;
     }
 
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //
+    // EQUALS & HASHCODE
+    //
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     @Override
     public boolean equals(Object o) {
@@ -35,6 +78,7 @@ public class Veiculo {
 
     @Override
     public int hashCode() {
+
         return Objects.hash(getId());
     }
 }
