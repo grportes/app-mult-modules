@@ -26,7 +26,7 @@ lazy val transporte = (project in file("modules/transporte"))
   .dependsOn(commons,repository)
 
 lazy val defaultSettings = Seq(
-  scalaVersion := "2.12.6",
+  scalaVersion := "2.12.8",
   libraryDependencies ++= Seq(
     guice,
     javaJpa,
@@ -52,3 +52,8 @@ testOptions in Test := Seq(Tests.Argument(TestFrameworks.JUnit, "-a", "-v"))
 
 
 PlayKeys.externalizeResources := false
+
+
+// Resolve only newly added dependencies
+//updateOptions := updateOptions.value.withCachedResolution(true)
+updateOptions := updateOptions.value.withLatestSnapshots(false)
