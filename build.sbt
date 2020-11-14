@@ -1,5 +1,4 @@
 name := """app-mult-modules"""
-
 version := "1.0-SNAPSHOT"
 
 lazy val root = (project in file("."))
@@ -12,48 +11,37 @@ lazy val commons = (project in file("modules/commons"))
   .settings(defaultSettings)
 
 lazy val repository = (project in file("modules/repository"))
-  .settings(defaultSettings,persistenceSettings)
+  .settings(defaultSettings, persistenceSettings)
   .dependsOn(commons)
 
 lazy val admin = (project in file("modules/admin"))
   .enablePlugins(PlayJava)
-  .settings(defaultSettings)
+  .settings(defaultSettings, persistenceSettings)
   .dependsOn(commons,repository)
 
 lazy val transporte = (project in file("modules/transporte"))
   .enablePlugins(PlayJava)
-  .settings(defaultSettings)
+  .settings(defaultSettings, persistenceSettings)
   .dependsOn(commons,repository)
 
 lazy val defaultSettings = Seq(
-  scalaVersion := "2.12.8",
+  scalaVersion := "2.13.1",
   libraryDependencies ++= Seq(
     guice,
     javaJpa,
-    "br.com.infra" % "infra-core_2.12" % "1.1-SNAPSHOT"
+    "br.com.infra" % "infra-core_2.13" % "1.2"
   )
 )
 
 lazy val persistenceSettings = Seq(
   libraryDependencies ++= Seq(
-    "br.com.infra" % "infra-jpa_2.12" % "1.1-SNAPSHOT"
+    "br.com.infra" % "infra-jpa_2.13" % "1.2"
   )
 )
-
-crossScalaVersions := Seq("2.11.12", "2.12.4")
-
-
-// Testing libraries for dealing with CompletionStage...
-libraryDependencies += "org.assertj" % "assertj-core" % "3.6.2" % Test
-libraryDependencies += "org.awaitility" % "awaitility" % "2.0.0" % Test
-
-// Make verbose tests
-testOptions in Test := Seq(Tests.Argument(TestFrameworks.JUnit, "-a", "-v"))
 
 
 PlayKeys.externalizeResources := false
 
-
 // Resolve only newly added dependencies
 //updateOptions := updateOptions.value.withCachedResolution(true)
-updateOptions := updateOptions.value.withLatestSnapshots(false)
+//updateOptions := updateOptions.value.withLatestSnapshots(false)

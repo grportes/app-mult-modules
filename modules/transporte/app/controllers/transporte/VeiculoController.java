@@ -6,7 +6,6 @@ import play.mvc.Result;
 public class VeiculoController extends Controller {
 
     public Result buscarVlrAbastecimento() {
-
-        return ok("ok em veiculo transpo");
+        return ok("ok em veiculo transito");
     }
 }
